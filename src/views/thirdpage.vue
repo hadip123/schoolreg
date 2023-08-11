@@ -1,6 +1,6 @@
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive,ref } from 'vue';
 import router from '@/router';
 // @ts-ignore
 
@@ -56,6 +56,9 @@ const next = () => {
 
 
 }
+const back =()=>{
+    router.push('/secondpage')
+}
 const all = reactive({
     address: inputStore.address,
     home_phone: inputStore.home_phone,
@@ -87,8 +90,155 @@ const all = reactive({
 
 
 })
+//1
+const error_1 = ref()
+function onInput_1(e:any) {
+  const value = e.target.value
+
+  if (isNaN(value)) {
+    error_1.value = true
+  } else {
+    error_1.value = false
+
+  }
+}
+//2
+const error_2 = ref()
+function onInput_2(e:any) {
+  const value = e.target.value
+
+  if (isNaN(value)|| !all.father_phone.startsWith('09')|| all.father_phone.length > 11|| all.father_phone.length < 11) {
+    error_2.value = true
+  } else {
+    error_2.value = false
+
+  }
+}
+//3
+const error_3 = ref()
+function onInput_3(e:any) {
+  const value = e.target.value
+
+  if (isNaN(value)|| !all.mother_phone.startsWith('09')|| all.mother_phone.length > 11|| all.mother_phone.length < 11) {
+    error_3.value = true
+  } else {
+    error_3.value = false
+
+  }
+}
+//4
+const error_4 = ref()
+function onInput_4(e:any) {
+  const value = e.target.value
+
+  if (isNaN(value)|| !all.phone.startsWith('09')|| all.phone.length > 11|| all.phone.length < 11) {
+    error_4.value = true
+  } else {
+    error_4.value = false
+
+  }
+}
+//5
+const error_5 = ref()
+function onInput_5(e:any) {
+  const value = e.target.value
+
+  if (isNaN(value)) {
+    error_5.value = true
+  } else {
+    error_5.value = false
+  }
+}
+//6
+const error_6= ref()
+const error_lenght_1 = ref ()
+function onInput_6 (e:any){
+    const value = e.target.value
+
+if (isNaN(value) ) {
+  error_6.value = true
+} 
+else if(all.supervisor_birth_day.length > 2){
+error_lenght_1.value = true
+}
+else if (all.supervisor_birth_day.length>0){
+    error_6.value = false
+    error_lenght_1.value = false
+
+}
+
+else if (all.supervisor_birth_day.length < 3){
+    error_lenght_1.value = false
+
+}
+else {
+  error_6.value = false
+}
+}
+const error_7= ref()
+const error_lenght_2 = ref ()
+function onInput_7 (e:any){
+    const value = e.target.value
+
+if (isNaN(value) ) {
+  error_7.value = true
+} 
+else if(all.supervisor_birth_month.length > 2){
+error_lenght_2.value = true
+}
+else if (all.supervisor_birth_month.length>0){
+    error_7.value = false
+    error_lenght_2.value = false
+
+}
+
+else if (all.supervisor_birth_month.length < 3){
+    error_lenght_2.value = false
+
+}
+else {
+  error_7.value = false
+}
+}
+const error_8= ref()
+const error_lenght_3 = ref ()
+function onInput_8 (e:any){
+    const value = e.target.value
+
+if (isNaN(value) ) {
+  error_8.value = true
+} 
+else if(all.supervisor_birth_year.length > 2){
+error_lenght_3.value = true
+}
+else if (all.supervisor_birth_year.length>0){
+    error_8.value = false
+    error_lenght_3.value = false
+
+}
+
+else if (all.supervisor_birth_year.length < 3){
+    error_lenght_3.value = false
+
+}
+else {
+  error_8.value = false
+}
+}
+//9
+// const error_9 = ref()
+// function onInput_9(e:any) {
+//   const value = e.target.value
+
+//   if (isNaN(value)||all.email.endsWith("@gmail.com")) {
+//     error_9.value = true
+//   } else {
+//     error_9.value = false
+//   }
+// }
 </script>
 <template>
+    <main style="padding-bottom:145px;">
     <div class="container"
         style="font-family: B Homa; text-align: right; background-color: rgba(255, 255, 255, 0.76); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px);"
         dir="rtl">
@@ -105,8 +255,11 @@ const all = reactive({
             <div class="col-md-4">
                 <div class="form-group">
                     <label>تلفن منزل</label>
-                    <input title="فقط عدد وارد کنید!" type="text" class="form-control" name="home_phone"
+                    <input @input="onInput_1" title="فقط عدد وارد کنید!" type="text" class="form-control" name="home_phone"
                         v-model="all.home_phone">
+                        <p v-if="error_1" style="color: red;">شماره تلفن اشتباه است!</p>
+
+
                 </div>
             </div>
             <div class="col-md-4">
@@ -130,22 +283,28 @@ const all = reactive({
             <div class="col-md-4">
                 <div class="form-group">
                     <label>تلفن همراه پدر</label>
-                    <input title="فقط عدد وارد کنید!" type="text" class="form-control" name="father_phone"
+                    <input @input="onInput_2" title="فقط عدد وارد کنید!" type="text" class="form-control" name="father_phone"
                         v-model="all.father_phone">
+                        <p v-if="error_2" style="color: red;">شماره تلفن اشتباه است!</p>
+
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-group">
                     <label>تلفن همراه مادر</label>
-                    <input title="فقط عدد وارد کنید!" type="text" class="form-control" name="mother_phone"
+                    <input @input="onInput_3" title="فقط عدد وارد کنید!" type="text" class="form-control" name="mother_phone"
                         v-model="all.mother_phone">
+                        <p v-if="error_3" style="color: red;">شماره تلفن اشتباه است!</p>
+
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>تلفن همراه</label>
-                    <input title="فقط عدد وارد کنید!" type="text" class="form-control" name="phone" v-model="all.phone">
+                    <label>تلفن همراه دانش آموز</label>
+                    <input @input="onInput_4" title="فقط عدد وارد کنید!" type="text" class="form-control" name="phone" v-model="all.phone">
+                    <p v-if="error_4" style="color: red;">شماره تلفن اشتباه است!</p>
+
                 </div>
             </div>
         </div>
@@ -157,8 +316,11 @@ const all = reactive({
             <div class="col-md-4">
                 <div class="form-group">
                     <label>تلفن اضطراری</label>
-                    <input title="فقط عدد وارد کنید!" type="text" class="form-control" name="emergency_phone"
+                    <input @input="onInput_5" title="فقط عدد وارد کنید!" type="text" class="form-control" name="emergency_phone"
                         v-model="all.emergency_phone">
+                        <p v-if="error_5" style="color: red;">شماره تلفن اشتباه است!</p>
+
+
                 </div>
             </div>
 
@@ -279,22 +441,28 @@ const all = reactive({
             <div class="col-md-4">
                 <div class="form-group">
                     <label>روز تولد سرپرست</label>
-                    <input title="فقط عدد وارد کنید!" type="text" class="form-control" name="supervisor_birth_day"
+                    <input @input="onInput_6" title="فقط عدد وارد کنید!" type="text" class="form-control" name="supervisor_birth_day"
                         v-model="all.supervisor_birth_day">
+                        <p v-if="error_6" style="color: red;">لطفا فقط عدد وارد کنید!</p>
+                        <p v-if="error_lenght_1" style="color: red;">اعداد بیش از حد است!</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label>ماه تولد سرپرست</label>
-                    <input title="فقط عدد وارد کنید!" type="text" class="form-control" name="supervisor_birth_month"
+                    <input @input="onInput_7" title="فقط عدد وارد کنید!" type="text" class="form-control" name="supervisor_birth_month"
                         v-model="all.supervisor_birth_month">
+                        <p v-if="error_7" style="color: red;">لطفا فقط عدد وارد کنید!</p>
+                        <p v-if="error_lenght_2" style="color: red;">اعداد بیش از حد است!</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label>سال تولد سرپرست</label>
-                    <input title="فقط عدد وارد کنید!" type="text" class="form-control" name="supervisor_birth_year"
+                    <input @input="onInput_8" title="فقط عدد وارد کنید!" type="text" class="form-control" name="supervisor_birth_year"
                         v-model="all.supervisor_birth_year">
+                        <p v-if="error_8" style="color: red;">لطفا فقط عدد وارد کنید!</p>
+                        <p v-if="error_lenght_3" style="color: red;">اعداد بیش از حد است!</p>
                 </div>
             </div>
 
@@ -310,20 +478,22 @@ const all = reactive({
             <div class="col-md-4">
                 <div class="form-group">
                     <label>ایمیل</label>
-                    <input type="email" class="form-control" name="email" v-model="all.email">
+                    <input  type="email" class="form-control" name="email" v-model="all.email">
+
+
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>قد</label>
+                    <label>قد (سانتی متر)</label>
                     <input title="فقط عدد وارد کنید!" type="text" class="form-control" name="height" v-model="all.height">
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label>وزن</label>
+                    <label>وزن (کیلو گرم)</label>
                     <input title="فقط عدد وارد کنید!" type="text" class="form-control" name="weight" v-model="all.weight">
                 </div>
             </div>
@@ -341,6 +511,9 @@ const all = reactive({
 
         </div>
         <button type="submit" class="btn btn-primary" @click="next()">بعدی</button>
+        <button style="float: left;" type="submit" class="btn btn-primary" @click="back()">بازگشت</button>
+
 
     </div>
+</main>
 </template>

@@ -3,12 +3,18 @@ import firstpage from '../views/firstpage.vue'
 import secondpage from '../views/secondpage.vue'
 import thirdpage from '../views/thirdpage.vue'
 import fourthpage from '../views/fourthpage.vue'
+import startpage from '../views/startpage.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home',
+      component: startpage
+    },
+    {
+      path: '/firstpage',
+      name: 'firstpage',
       component: firstpage
     },
     {

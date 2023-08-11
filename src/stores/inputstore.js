@@ -16,7 +16,7 @@ export const useInputStore = defineStore("input", {
     birth_day: "",
     birth_month: "",
     birth_year: "",
-    country: "ایرانی",
+    country: "",
     city: "",
     postal_code: "",
     religion: "",

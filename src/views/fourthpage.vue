@@ -26,6 +26,66 @@ const all = reactive({
 
 
 })
+const error_1= ref(false);
+function onInput_1 (e:any){
+    const value = e.target.value
+
+if (isNaN(value)) {
+  error_1.value = true
+
+} else {
+  error_1.value = false
+
+}
+}
+const error_2= ref(false);
+function onInput_2 (e:any){
+    const value = e.target.value
+
+if (isNaN(value)) {
+  error_2.value = true
+
+} else {
+  error_2.value = false
+
+}
+}
+const error_3= ref(false);
+function onInput_3 (e:any){
+    const value = e.target.value
+
+if (isNaN(value)) {
+  error_3.value = true
+
+} else {
+  error_3.value = false
+
+}
+}
+const error_4= ref(false);
+function onInput_4 (e:any){
+    const value = e.target.value
+
+if (isNaN(value)|| !all.shad_mobile.startsWith('09')|| all.shad_mobile.length > 11|| all.shad_mobile.length < 11) {
+  error_4.value = true
+
+} else {
+  error_4.value = false
+
+}
+}
+const error_5= ref(false);
+function onInput_5 (e:any){
+    const value = e.target.value
+
+if (isNaN(value)|| !all.gov_portal_number.startsWith('09')|| all.gov_portal_number.length > 11|| all.gov_portal_number.length < 11) {
+  error_5.value = true
+
+} else {
+  error_5.value = false
+
+}
+}
 const finish = () => {
     if (all.previous_year_status &&
         all.ninth_grade_second_gpa &&
@@ -53,10 +113,12 @@ const finish = () => {
         inputStore.setInputValue("shad_mobile", all.shad_mobile);
         inputStore.setInputValue("gov_portal_number", all.gov_portal_number);
 
-        // setTimeout(() => {
-        //     router.push('/')
-        // }, 3000);
-        console.log(all.shad_mobile);
+
+
+
+
+
+
 
         const data = inputStore.getValues()
 
@@ -73,6 +135,7 @@ const finish = () => {
                 alert(response)
 
                 router.push('/')
+                
             } else {
                 alert('خطا')
             }
@@ -86,12 +149,17 @@ const finish = () => {
     }
 
 }
-
+const back =()=>{
+    router.push('/thirdpage')
+}
 </script>
 <template>
+    <main  style="padding-bottom: 165px;">
     <div class="container"
         style="font-family: B Homa; text-align: right; background-color: rgba(255, 255, 255, 0.76); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px);"
         dir="rtl">
+        <h3>وضعیت سال گذشته</h3>
+        <hr>    
         <div class="row">
 
             <div class="col-md-6">
@@ -109,9 +177,11 @@ const finish = () => {
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>معدل نیمسال دوم کلاس نهم</label>
-                    <input type="text" class="form-control" name="ninth_grade_second_gpa"
+                    <label>معدل نیمسال دوم کلاس نهم(مثال : 19.20)</label>
+                    <input @input="onInput_1" type="text" class="form-control" name="ninth_grade_second_gpa"
                         v-model="all.ninth_grade_second_gpa">
+                        <p v-if="error_1" style="color: red;">لطفا فقط عدد وارد کنید!</p>
+
                 </div>
             </div>
 
@@ -122,8 +192,10 @@ const finish = () => {
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>معدل سال کلاس نهم</label>
-                    <input type="text" class="form-control" name="ninth_gpa" v-model="all.ninth_gpa">
+                    <label>معدل سال کلاس نهم(مثال : 19.50)</label>
+                    <input @input="onInput_2" type="text" class="form-control" name="ninth_gpa" v-model="all.ninth_gpa">
+                    <p v-if="error_2" style="color: red;">لطفا فقط عدد وارد کنید!</p>
+
                 </div>
 
             </div>
@@ -154,7 +226,9 @@ const finish = () => {
             <div class="col-md-6">
                 <div class="form-group">
                     <label>کد مدرسه قبلی</label>
-                    <input type="text" class="form-control" name="previous_school_code" v-model="all.previous_school_code">
+                    <input @input="onInput_3" type="text" class="form-control" name="previous_school_code" v-model="all.previous_school_code">
+                    <p v-if="error_3" style="color: red;">لطفا فقط عدد وارد کنید!</p>
+
                 </div>
             </div>
 
@@ -239,19 +313,26 @@ const finish = () => {
             <div class="col-md-4">
                 <div class="form-group">
                     <label>شماره موبایل سامانه شاد</label>
-                    <input type="text" class="form-control" name="shad_mobile" v-model="all.shad_mobile">
+                    <input @input="onInput_4" type="text" class="form-control" name="shad_mobile" v-model="all.shad_mobile">
+                    <p v-if="error_4" style="color: red;">شماره اشتباه است</p>
+
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="form-group">
                     <label>شماره موبایل استفاده شده در درگاه دولت</label>
-                    <input type="text" class="form-control" name="gov_portal_number" v-model="all.gov_portal_number">
+                    <input @input="onInput_5" type="text" class="form-control" name="gov_portal_number" v-model="all.gov_portal_number">
+                    <p v-if="error_5" style="color: red;">شماره اشتباه است</p>
+
                 </div>
             </div>
 
         </div>
         <button type="submit" @click="finish()" class="btn btn-primary">ثبت اطلاعات</button>
+        <button style="float: left;" type="submit" @click="back()" class="btn btn-primary">بازگشت</button>
+
 
     </div>
+</main>
 </template>

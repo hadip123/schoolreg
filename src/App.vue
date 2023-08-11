@@ -4,13 +4,13 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <main
-    style="background-image: url('./back.jpg'); background-repeat: no-repeat; height: 869px;background-size: cover; background-attachment: fixed;">
-    <img style="" src="" alt="">
+  <main>
+<br>    
+    
     <RouterView />
+
   </main>
 </template>
-
 <style scoped>
 @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
 
@@ -22,4 +22,19 @@ import { RouterLink, RouterView } from 'vue-router'
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+main{
+  background-image: url('./back.jpg');
+   background-repeat: no-repeat; 
+   background-size: cover;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+  
+
+}
+
+
 </style>
