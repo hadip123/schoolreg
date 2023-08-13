@@ -183,7 +183,7 @@ const error_8 = ref(false)
 function onInput_8(e:any) {
   const value = e.target.value
 
-  if ( all.postal_code.length < 9 || all.postal_code.length > 9 || isNaN(value)) {
+  if ( all.postal_code.length < 10 || all.postal_code.length > 10 || isNaN(value)) {
     error_8.value = true
 
   } else {

@@ -5,6 +5,7 @@ import router from "@/router";
 import { useInputStore } from "../stores/inputstore";
 
 import { reactive,ref } from "vue";
+// @ts-ignore
 import { stringify } from "querystring";
 const inputStore = useInputStore();
 
